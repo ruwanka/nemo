@@ -1,0 +1,17 @@
+name: update dependency
+tasks:
+  - name: git-checkout
+    arguments:
+      branch: TASK-01
+      new: true
+  - name: mvn-dependency-update
+    arguments:
+      groupId: org.springframework.cloud
+      artifactId: spring-cloud-commons-dependencies
+      version: 0.0.1
+  - name: git-push
+execution:
+  by: git-checkout
+  argument: dir
+  repeatOn:
+    - F:/repos/ruwanka/spring-cloud-config.git

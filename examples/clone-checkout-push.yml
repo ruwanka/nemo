@@ -1,0 +1,15 @@
+name: checkout, push
+tasks:
+  - name: git-checkout
+    arguments:
+      new: true
+      branch: TASK-01
+  - name: git-push
+    arguments:
+      username: ruwanka
+      password: "*******"
+execution:
+  by: git-checkout
+  argument: dir
+  repeatOn:
+    - G:\nemo\ruwanka\spring-cloud-config

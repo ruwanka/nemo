@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="git-actions" />
+        <module name="maven-actions" />
+        <module name="nemo-core" />
+        <module name="action-api" />
+        <module name="json-actions" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="action-api" target="11" />
+      <module name="git-actions" target="11" />
+      <module name="json-actions" target="11" />
+      <module name="maven-actions" target="11" />
+      <module name="nemo" target="11" />
+      <module name="nemo-core" target="14" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

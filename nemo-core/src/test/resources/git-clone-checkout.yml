@@ -1,0 +1,20 @@
+name: clone github projects
+tasks:
+  - name: git-clone
+    arguments:
+      username: ruwankamadhushan@gmail.com
+      password: "*******"
+      baseDir: G:\nemo
+  - name: git-checkout
+    arguments:
+      branch: TASK-01
+      new: true
+execution:
+  by: git-clone
+  argument: url
+  repeatOn:
+    - https://github.com/ruwanka/mvn-dependnecy-updater.git
+    - https://github.com/ruwanka/qLaunch.git
+    - https://github.com/snsyzf/maven-dependencies-searcher.git
+
+

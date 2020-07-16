@@ -1,0 +1,11 @@
+name: add property to pom file
+tasks:
+  - name: mvn-add-property
+    arguments:
+      property: project.build.sourceEncoding
+      value: UTF-8
+execution:
+  by: mvn-add-property
+  argument: pomFile
+  repeatOn:
+    - C:\Users\Ruwanka\Documents\java-projects\nemo\pom.xml

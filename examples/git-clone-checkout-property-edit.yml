@@ -1,0 +1,27 @@
+name: clone github projects
+tasks:
+  - name: git-clone
+    arguments:
+      username: ruwankamadhushan@gmail.com
+      password: "*******"
+      baseDir: G:\nemo
+  - name: git-checkout
+    arguments:
+      branch: TASK-01
+      new: true
+  - name: mvn-add-property
+    arguments:
+      property: "project.build.sourceEncoding"
+      value: "UTF-8"
+  - name: mvn-dependency-update
+    arguments:
+      groupId: org.springframework.cloud
+      artifactId: spring-cloud-commons-dependencies
+      version: 0.0.1
+execution:
+  by: git-clone
+  argument: url
+  repeatOn:
+    - https://github.com/ruwanka/spring-cloud-config.git
+
+

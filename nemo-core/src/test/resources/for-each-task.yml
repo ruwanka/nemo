@@ -1,0 +1,29 @@
+name: checkout, push
+tasks:
+  - name: test
+    arguments:
+      new: true
+      branch: TASK-01
+  - name: test
+    arguments:
+      username: ruwanka
+      password: "*******"
+  - name: for-each-input
+    arguments:
+      inputArg: json
+      inputType: json-list
+      ouputArg: url
+    tasks:
+      - name: test
+        arguments:
+          new: true
+          branch: TASK-01
+      - name: test
+        arguments:
+          username: ruwanka
+          password: "*******"
+execution:
+  by: git-checkout
+  argument: dir
+  repeatOn:
+    - G:\nemo\ruwanka\spring-cloud-config

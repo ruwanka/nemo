@@ -1,0 +1,29 @@
+name: add utf8 source encoding to maven files
+tasks:
+  - name: git-clone
+    arguments:
+      url: testurl
+  - name: git-checkout
+    arguments:
+      branch: TASK-01
+      new: true
+  - name: maven-add-property
+    arguments:
+      where: "at-end-of-properties"
+      onlyToRoot: true
+      property: "<source.endcoding.UTF8>"
+      value: "something"
+  - name: git-commit
+    arguments:
+      message: "add utf8 source encoding"
+      author: ""
+  - name: git-push
+execution:
+  by: git-clone
+  argument: url
+  repeatOn:
+    - url1
+    - url2
+    - url3
+
+
