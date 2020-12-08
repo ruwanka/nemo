@@ -47,7 +47,7 @@ class TaskExecutorTest {
 
         Task t = new Task();
         t.setName("test-action");
-        Map<String, String> arguments = new HashMap<>();
+        Map<String, Object> arguments = new HashMap<>();
         t.setArguments(arguments);
 
         TaskExecutor taskExecutor = new TaskExecutor(actionProvider);

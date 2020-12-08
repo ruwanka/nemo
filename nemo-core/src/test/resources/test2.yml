@@ -1,0 +1,6 @@
+name: file argument test
+tasks:
+  - name: test
+    args:
+      - key: workDir
+        value: G:\\Something

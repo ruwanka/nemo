@@ -14,4 +14,13 @@ public class ActionResult {
     public <T> T get(String key) {
         return (T) results.get(key);
     }
+
+    public <T> void put(Key<T> key, T value){
+        results.put(key.key(), value);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T get(Key<T> key) {
+        return (T) results.get(key.key());
+    }
 }

@@ -1,9 +1,7 @@
 package com.aptkode.nemo.git;
 
-import com.aptkode.nemo.api.Action;
-import com.aptkode.nemo.api.ActionContext;
-import com.aptkode.nemo.api.ActionResult;
-import com.aptkode.nemo.api.Arguments;
+import com.aptkode.nemo.api.*;
+import com.aptkode.nemo.api.Keys;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
@@ -19,13 +17,13 @@ public class GitCloneAction implements Action {
             File directory = getDirectory(args);
             Git call = Git.cloneRepository()
                     .setCredentialsProvider(
-                            new UsernamePasswordCredentialsProvider(args.get("username"), args.get("password")))
+                            new UsernamePasswordCredentialsProvider(args.get(Keys.USERNAME), args.get(Keys.PASSWORD)))
                     .setDirectory(directory)
-                    .setURI(args.get("url"))
+                    .setURI(args.get(Keys.URL))
                     .call();
             call.close();
             ActionResult actionResult = new ActionResult();
-            actionResult.put("dir", directory);
+            actionResult.put(Keys.DIR, directory);
             return actionResult;
         } catch (GitAPIException e) {
             e.printStackTrace();

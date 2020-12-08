@@ -1,12 +1,16 @@
 package com.aptkode.nemo.core;
 
+import com.aptkode.nemo.api.Args;
+import com.aptkode.nemo.api.Argument;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class Task {
     private String name;
-    private Map<String,String> arguments;
+    private Map<String,Object> arguments;
+    private List<Argument<Object>> args;
     private List<Task> tasks;
     private Execution execution;
 
@@ -18,12 +22,20 @@ public class Task {
         this.name = name;
     }
 
-    public Map<String, String> getArguments() {
+    public Map<String, Object> getArguments() {
         return arguments;
     }
 
-    public void setArguments(Map<String, String> arguments) {
+    public void setArguments(Map<String, Object> arguments) {
         this.arguments = arguments;
+    }
+
+    public List<Argument<Object>> getArgs() {
+        return args;
+    }
+
+    public void setArgs(List<Argument<Object>> args) {
+        this.args = args;
     }
 
     public List<Task> getTasks() {

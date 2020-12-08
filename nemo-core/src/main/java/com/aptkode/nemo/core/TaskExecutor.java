@@ -4,44 +4,28 @@ import com.aptkode.nemo.api.Action;
 import com.aptkode.nemo.api.ActionContext;
 import com.aptkode.nemo.api.ActionResult;
 import com.aptkode.nemo.api.Arguments;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.aptkode.nemo.core.serialize.TaskReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class TaskExecutor {
-    private final ObjectMapper objectMapper;
     private final ActionProvider actionProvider;
     private static final Logger logger = LogManager.getLogger(TaskExecutor.class);
 
     public TaskExecutor() {
-        objectMapper = new ObjectMapper(new YAMLFactory());
         actionProvider = new ActionProvider();
     }
 
     public TaskExecutor(ActionProvider actionProvider) {
-        objectMapper = new ObjectMapper(new YAMLFactory());
         this.actionProvider = actionProvider;
     }
 
     public Task read(String path) {
-        ObjectReader objectReader = objectMapper.readerFor(Task.class);
-        try {
-            return objectReader.readValue(new File(path));
-        } catch (MismatchedInputException e) {
-            throw new IllegalArgumentException("cannot parse task!", e);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new Task();
-        }
+        return TaskReader.getInstance().read(path);
     }
 
     public ActionResult execute(Task task) {
@@ -78,8 +62,8 @@ public class TaskExecutor {
         if (execution != null) {
             throw new IllegalStateException("for each input should'n have execution");
         }
-        Map<String, String> arguments = t.getArguments();
-        String ouputArg = arguments.get("ouputArg");
+        Map<String, Object> arguments = t.getArguments();
+        String ouputArg = (String) arguments.get("ouputArg");
 
         ActionResult actionResult = executeAction(t, previousResult);
 
