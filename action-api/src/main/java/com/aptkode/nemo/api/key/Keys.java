@@ -1,4 +1,4 @@
-package com.aptkode.nemo.api;
+package com.aptkode.nemo.api.key;
 
 public final class Keys {
 

@@ -3,11 +3,10 @@ package com.aptkode.nemo.json;
 import com.aptkode.nemo.api.ActionContext;
 import com.aptkode.nemo.api.ActionResult;
 import com.aptkode.nemo.api.Arguments;
+import com.aptkode.nemo.api.argument.Args;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -50,7 +49,7 @@ public class JsonPathActionTest {
         HashMap<String, Object> arguments = new HashMap<>();
         arguments.put("jsonSrc", json);
         arguments.put("jsonPath", "$.book[*].price");
-        ActionResult result = jsonPathAction.execute(new ActionContext(new Arguments(arguments)));
+        ActionResult result = jsonPathAction.execute(new ActionContext(new Arguments(arguments), new Args()));
         assertEquals("[49.99,29.99]", result.get("json"));
     }
 }

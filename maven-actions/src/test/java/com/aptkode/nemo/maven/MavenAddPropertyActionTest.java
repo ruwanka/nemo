@@ -2,6 +2,7 @@ package com.aptkode.nemo.maven;
 
 import com.aptkode.nemo.api.ActionContext;
 import com.aptkode.nemo.api.Arguments;
+import com.aptkode.nemo.api.argument.Args;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
@@ -25,7 +26,7 @@ public class MavenAddPropertyActionTest {
         args.put("pomFile", "G:/nemo/ruwanka/spring-cloud-config/pom.xml");
         args.put("property", "test.prop");
         args.put("value", "test-value");
-        ActionContext actionContext = new ActionContext(new Arguments(args));
+        ActionContext actionContext = new ActionContext(new Arguments(args), new Args());
 
         action.execute(actionContext);
 
@@ -47,7 +48,7 @@ public class MavenAddPropertyActionTest {
         args.put("pomFile", "src/test/resources/pom-with-no-property.xml");
         args.put("property", "existing.prop");
         args.put("value", "changed-value");
-        ActionContext actionContext = new ActionContext(new Arguments(args));
+        ActionContext actionContext = new ActionContext(new Arguments(args), new Args());
 
         action.execute(actionContext);
 

@@ -1,16 +1,19 @@
 name: clone github projects
 tasks:
   - name: git-clone
-    arguments:
-      username: ruwankamadhushan@gmail.com
-      password: "*******"
     args:
-      - key: baseDir
-        value: G:\nemo
       - key: username
         value: ruwankamadhushan@gmail.com
       - key: password
-        value: mmdRsh90
+        value: "*******"
+      - key: baseDir
+        value: G:\nemo
+  - name: git-checkout
+    args:
+      - key: gitCheckOutConfig
+        value:
+          branch: TASK-01
+          create: true
 execution:
   by: git-clone
   argument: url
@@ -18,3 +21,5 @@ execution:
     - https://github.com/ruwanka/mvn-dependnecy-updater.git
     - https://github.com/ruwanka/qLaunch.git
     - https://github.com/snsyzf/maven-dependencies-searcher.git
+
+

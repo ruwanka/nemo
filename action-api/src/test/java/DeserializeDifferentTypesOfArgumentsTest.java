@@ -1,4 +1,8 @@
-import com.aptkode.nemo.api.*;
+import com.aptkode.nemo.api.argument.Args;
+import com.aptkode.nemo.api.argument.Argument;
+import com.aptkode.nemo.api.argument.FileArgument;
+import com.aptkode.nemo.api.key.Key;
+import com.aptkode.nemo.api.key.Keys;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -27,7 +31,7 @@ public class DeserializeDifferentTypesOfArgumentsTest {
         args.addDeserializer(Argument.class, keyValueDeserializer);
         objectMapper.registerModule(args);
         Args arguments = objectMapper.readValue(new File("src/test/resources/test2.yml"), Args.class);
-        System.out.println(arguments.get(Keys.WORK_DIR));
+        System.out.println(arguments.getOptional(Keys.WORK_DIR));
     }
 
     static class KeyValueDeserializer extends StdDeserializer<Argument>

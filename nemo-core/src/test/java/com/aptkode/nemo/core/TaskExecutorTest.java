@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,14 +20,14 @@ import static org.mockito.Mockito.*;
 class TaskExecutorTest {
 
     @Test
-    void readTaskTest() {
+    void readTaskTest() throws IOException {
         TaskExecutor taskExecutor = new TaskExecutor();
         Task task = taskExecutor.read("src/test/resources/git-clone-edit-push.yml");
         assertEquals(5, task.getTasks().size());
     }
 
     @Test
-    void executeTest() {
+    void executeTest() throws IOException {
         ActionProvider actionProvider = mock(ActionProvider.class);
         doReturn(Optional.of(mock(Action.class))).when(actionProvider).get(anyString());
 
@@ -37,6 +38,20 @@ class TaskExecutorTest {
         taskExecutor.execute(task);
 
         verify(taskExecutor, times(15)).executeAction(any(), any());
+    }
+
+    @Test
+    void executeWithNewArgsTest() throws IOException {
+        ActionProvider actionProvider = mock(ActionProvider.class);
+        doReturn(Optional.of(mock(Action.class))).when(actionProvider).get(anyString());
+
+        TaskExecutor taskExecutor = Mockito.spy(new TaskExecutor(actionProvider));
+        doReturn(null).when(taskExecutor).executeAction(any(), isNull());
+
+        Task task = taskExecutor.read("src/test/resources/git-clone-new.yml");
+        taskExecutor.execute(task);
+
+        verify(taskExecutor, times(3)).executeAction(any(), any());
     }
 
     @Test
@@ -59,7 +74,7 @@ class TaskExecutorTest {
     }
 
     @Test
-    void executeForEachActionTest() {
+    void executeForEachActionTest() throws IOException {
         ActionProvider actionProvider = mock(ActionProvider.class);
         ForEachInputAction forEachInputAction = spy(new ForEachInputAction());
         doReturn(Optional.of(forEachInputAction)).when(actionProvider).get(eq("for-each-input"));

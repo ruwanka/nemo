@@ -4,10 +4,14 @@ import com.aptkode.nemo.api.Action;
 import com.aptkode.nemo.api.ActionContext;
 import com.aptkode.nemo.api.ActionResult;
 import com.aptkode.nemo.api.Arguments;
+import com.aptkode.nemo.api.argument.Args;
+import com.aptkode.nemo.api.argument.Argument;
+import com.aptkode.nemo.api.argument.StringArgument;
 import com.aptkode.nemo.core.serialize.TaskReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,7 +28,7 @@ public class TaskExecutor {
         this.actionProvider = actionProvider;
     }
 
-    public Task read(String path) {
+    public Task read(String path) throws IOException {
         return TaskReader.getInstance().read(path);
     }
 
@@ -38,6 +42,18 @@ public class TaskExecutor {
             List<Task> tasks = task.getTasks();
             Optional<Task> commonTask = tasks.stream().filter(t -> t.getName().equals(by)).findFirst();
             commonTask.ifPresent(t -> t.getArguments().put(argument, arg));
+            // put args
+            commonTask.ifPresent(t -> {
+                Optional<Argument<Object>> commonArg = t.getArgs().stream().filter(a -> a.getKey().equals(argument)).findFirst();
+                if(commonArg.isPresent()){
+                    commonArg.get().setValue(arg);
+                }else{
+                    Argument stringArgument = new StringArgument();
+                    stringArgument.setKey(argument);
+                    stringArgument.setValue(arg);
+                    commonTask.get().getArgs().add(stringArgument);
+                }
+            });
             for (Task t : tasks) {
                 if ("for-each-input".equals(t.getName())) {
                     previousResult = executeForEachAction(t, previousResult);
@@ -54,7 +70,7 @@ public class TaskExecutor {
         logger.info("executing action {}", name);
         Optional<Action> optionalAction = actionProvider.get(name);
         Action action = optionalAction.orElseThrow(() -> new IllegalArgumentException("no action found by name " + name));
-        return action.execute(new ActionContext(new Arguments(t.getArguments()), previousResult));
+        return action.execute(new ActionContext(new Arguments(t.getArguments()), new Args(t.getArgs()), previousResult));
     }
 
     public ActionResult executeForEachAction(Task t, ActionResult previousResult) {

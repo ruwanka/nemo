@@ -2,6 +2,7 @@ package com.aptkode.nemo.maven;
 
 import com.aptkode.nemo.api.ActionContext;
 import com.aptkode.nemo.api.Arguments;
+import com.aptkode.nemo.api.argument.Args;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -28,7 +29,7 @@ public class MavenUpdateDependencyActionTest {
         args.put("groupId", "org.springframework.cloud");
         args.put("artifactId", "spring-cloud-commons-dependencies");
         args.put("version", "0.0.1");
-        ActionContext actionContext = new ActionContext(new Arguments(args));
+        ActionContext actionContext = new ActionContext(new Arguments(args), new Args());
 
         action.execute(actionContext);
 

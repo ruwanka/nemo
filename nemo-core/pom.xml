@@ -26,11 +26,13 @@
                     <groupId>org.slf4j</groupId>
                 </exclusion>
             </exclusions>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.aptkode</groupId>
             <artifactId>maven-actions</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

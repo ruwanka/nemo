@@ -1,4 +1,7 @@
-package com.aptkode.nemo.api;
+package com.aptkode.nemo.api.key;
+
+import com.aptkode.nemo.api.ActionResult;
+import com.aptkode.nemo.api.Arguments;
 
 public class AbstractKey<T> implements Key<T> {
     private final String id;

@@ -10,7 +10,7 @@ tasks:
       - key: username
         value: ruwankamadhushan@gmail.com
       - key: password
-        value: mmdRsh90
+        value: "*******"
 execution:
   by: git-clone
   argument: url

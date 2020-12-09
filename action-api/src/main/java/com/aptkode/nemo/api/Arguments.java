@@ -1,5 +1,7 @@
 package com.aptkode.nemo.api;
 
+import com.aptkode.nemo.api.key.Key;
+
 import java.util.HashMap;
 import java.util.Map;
 

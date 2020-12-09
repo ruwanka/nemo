@@ -1,9 +1,9 @@
 package com.aptkode.nemo.core;
 
-import com.aptkode.nemo.api.Args;
-import com.aptkode.nemo.api.Argument;
+import com.aptkode.nemo.api.argument.Argument;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +23,9 @@ public class Task {
     }
 
     public Map<String, Object> getArguments() {
+        if(arguments == null){
+            arguments = new HashMap<>();
+        }
         return arguments;
     }
 

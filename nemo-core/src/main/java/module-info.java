@@ -1,9 +1,10 @@
 import com.aptkode.nemo.api.Action;
+import com.aptkode.nemo.api.argument.ArgumentProvider;
 import com.aptkode.nemo.core.action.ForEachInputAction;
 
 module nemo.core {
     uses Action;
-    uses com.aptkode.nemo.api.ArgumentProvider;
+    uses ArgumentProvider;
     requires nemo.api;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.dataformat.yaml;

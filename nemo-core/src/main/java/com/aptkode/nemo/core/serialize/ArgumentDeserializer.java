@@ -1,7 +1,7 @@
 package com.aptkode.nemo.core.serialize;
 
-import com.aptkode.nemo.api.Argument;
-import com.aptkode.nemo.api.Key;
+import com.aptkode.nemo.api.argument.Argument;
+import com.aptkode.nemo.api.key.Key;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -15,14 +15,14 @@ import java.util.Iterator;
 import java.util.Map;
 
 @SuppressWarnings("rawtypes")
-class ArgumentDeserializer extends StdDeserializer<Argument> {
+public class ArgumentDeserializer extends StdDeserializer<Argument> {
     private final Map<String, Class<? extends Argument>> registry = new HashMap<>();
 
-    ArgumentDeserializer() {
+    private ArgumentDeserializer() {
         super(Argument.class);
     }
 
-    void registerArgumentByKey(Key uniqueAttribute, Class<? extends Argument> animalClass) {
+    public void registerArgumentByKey(Key uniqueAttribute, Class<? extends Argument> animalClass) {
         registry.put(uniqueAttribute.key(), animalClass);
     }
 
@@ -45,5 +45,13 @@ class ArgumentDeserializer extends StdDeserializer<Argument> {
         }
         if (animalClass == null) throw new IllegalArgumentException("argument should have key property!");
         return mapper.treeToValue(root, animalClass);
+    }
+
+    public static ArgumentDeserializer getInstance(){
+        return SingletonHolder.instance;
+    }
+
+    private static final class SingletonHolder{
+        private static final ArgumentDeserializer instance = new ArgumentDeserializer();
     }
 }

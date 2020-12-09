@@ -1,4 +1,7 @@
-package com.aptkode.nemo.api;
+package com.aptkode.nemo.api.key;
+
+import com.aptkode.nemo.api.ActionResult;
+import com.aptkode.nemo.api.Arguments;
 
 public interface Key<T> {
 

@@ -1,4 +1,6 @@
-package com.aptkode.nemo.api;
+package com.aptkode.nemo.api.argument;
+
+import com.aptkode.nemo.api.key.Key;
 
 import java.util.Map;
 
